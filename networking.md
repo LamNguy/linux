@@ -43,6 +43,7 @@ net.ipv6.conf.default.disable_ipv6 = 1
  
  Connect network namespace to the Physical Network : just use a bridge 
  
+ [link_create_vpn_tunnel_namespace](https://howto.lintel.in/run-openvpn-tunnel-inside-network-namespace/)
  
  
  
