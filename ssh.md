@@ -42,3 +42,15 @@ AllowUsers keyword can be followed by a list of user  name patterns , seperated 
   
   Copy all files and folders recursively from local to remote : \
   `$ scp myfile.txt myfile2.txt remoteuser@remoteserver:/remote/folder/`
+  
+  **Note** : remote user need have write permission to /remote/folder in the remote system . \
+  **Another method transfer** : SFTP ,  RSYNC \
+  
+ **5.Execute local scripts on remote machine and include arguments** \
+ 
+`$ ssh remote_server "bash -s" < ./file_bash [arguments]`
+
+
+
+ 
+ 
