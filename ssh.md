@@ -1,5 +1,5 @@
 In some case , password authentication will be disable by default \
-To enable ssh ***password authentication*** , edit file :\
+**1** To enable ssh ***password authentication*** , edit file :\
 `/etc/ssh/sshd_config` \
 and change the line : \
 `PasswordAuthentication no` \
@@ -7,10 +7,21 @@ to \
 `PasswordAuthentication yes`
 
 
-To enable ***Root login*** , edit file :\
+**2** To enable ***Root login*** , edit file :\
 `/etc/ssh/sshd_config` \
 and change the line : \
 `PermitRootLogin no`\
 to \
 `PermitRootLogin yes`\
 and restart ssh service : `sudo service ssh restart` and not forget to set root password : `sudo passwd root`
+
+
+**3** Restrict certain user log onto a system via ssh server 
+
+`AllowUsers user1 user2`
+
+AllowUsers keyword can be followed by a list of user  name patterns , seperated by space . If it specified ,login is only allowed for user names that match one of the pattern ,. * and ?  can be used as wildcards in the patterns . By default , all users are allowed. 
+
+`# vi /etc/ssh/sshd_config`
+
+`# /etc/init.d/sshd restart`
