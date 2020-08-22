@@ -48,5 +48,21 @@ net.ipv6.conf.default.disable_ipv6 = 1
  
  
  ***Link local*** \
- [Lhttps://en.wikipedia.org/wiki/Link-local_address) \
- Network 169.254.0.0 cho phép các máy trong subnet giao tiếp với nhau ( không giám sát việc trùng địa chỉ ip ) , khi dhcp gặp sự cố không hoạt động được hoặc không có ip tĩnh thì máy tính sẽ dùng dải địa chỉ này 
+ [Link](https://en.wikipedia.org/wiki/Link-local_address) \
+ Network 169.254.0.0/16 cho phép các máy trong subnet giao tiếp với nhau ( không giám sát việc trùng địa chỉ ip ) , khi dhcp gặp sự cố không hoạt động được hoặc không có ip tĩnh thì máy tính sẽ dùng dải địa chỉ này 
+-- See more in Zero Configuation Networking \
+-- avahi-autoipd \ 
+-- avahi-autoipd sẽ check xem có địa chỉ ip nào sẵn có không , nếu có thì nó sẽ không tự gán zero-config nữa , sử dụng avahi-autoipd --force-bind để tự  động gán địa chỉ 169.254 kể cả  khi có địa chỉ ip sẵn có . 
+
+
+***Bridge Networking***\
+`yum install bridge-utils`  \
+`man brctl 
+
+Check các port đang listnening `netstat -nlpt`
+
+
+
+
+
+
