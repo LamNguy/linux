@@ -47,4 +47,6 @@ net.ipv6.conf.default.disable_ipv6 = 1
  
  
  
- 
+ ***Link local*** \
+ [Lhttps://en.wikipedia.org/wiki/Link-local_address) \
+ Network 169.254.0.0 cho phép các máy trong subnet giao tiếp với nhau ( không giám sát việc trùng địa chỉ ip ) , khi dhcp gặp sự cố không hoạt động được hoặc không có ip tĩnh thì máy tính sẽ dùng dải địa chỉ này 
