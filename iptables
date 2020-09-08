@@ -1,0 +1,13 @@
+It will alert iptables that you are adding new rules to a chain. Then, you can combine the command with other options, such as:
+
+-i (interface) — the network interface whose traffic you want to filter, such as eth0, lo, ppp0, etc.
+-p (protocol) — the network protocol where your filtering process takes place. It can be either tcp, udp, udplite, icmp, sctp, icmpv6, and so on. Alternatively, you can type all to choose every protocol.
+-s (source) — the address from which traffic comes from. You can add a hostname or IP address.
+–dport (destination port) — the destination port number of a protocol, such as 22 (SSH), 443 (https), etc.
+-j (target) — the target name (ACCEPT, DROP, RETURN). You need to insert this every time you make a new rule.
+If you want to use all of them, you must write the command in this order:
+
+```
+sudo iptables -A <chain> -i <interface> -p <protocol (tcp/udp) > -s <source> --dport <port no.>  -j <target>
+```
+
