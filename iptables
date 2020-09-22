@@ -11,3 +11,25 @@ If you want to use all of them, you must write the command in this order:
 sudo iptables -A <chain> -i <interface> -p <protocol (tcp/udp) > -s <source> --dport <port no.>  -j <target>
 ```
 
+
+
+
+[10.10.1.0/23] --> 10.10.1.154 <Router> 192.168.100.1 --> floating ip VM : 192.168.100.233 
+
+iptables -t nat -A PREROUTING -p tcp -m tcp --dport 23322 -j DNAT --to 192.168.100.233:22
+Chuyển các gói tin có địa chỉ đích port 23222 thành địa chỉ 192.168.100.233:22 
+
+
+iptables -t nat -A POSTROUTING -p tcp -m tcp --dport 22 -d 192.168.100.233 -j MASQUERADE
+
+Chuyển các gói tin có địa chỉ đích là 192.168.100.233:22 , MASQERADE
+
+
+[10.10.1.0/23] --> 10.10.1.154 <R1> 192.168.100.1  --> 192.168.100.172 <R2> 192.168.14.1 --> VM 
+tại R2
+iptables -t nat -A PREROUTING -p tcp -m tcp --dport 17222 -j DNAT --to 192.168.14.165:22
+iptables -t nat -A POSTROUTING -p tcp -m tcp --dport 22 -d 192.168.14.165 -j MASQUERADE
+
+tại R1 
+iptables -t nat -A PREROUTING -p tcp -m tcp --dport 16522 -j DNAT --to 192.168.100.172:17222
+iptables -t nat -A POSTROUTING -p tcp -m tcp --dport 17222 -d 192.168.100.172 -j MASQUERADE
