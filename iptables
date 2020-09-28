@@ -33,3 +33,30 @@ iptables -t nat -A POSTROUTING -p tcp -m tcp --dport 22 -d 192.168.14.165 -j MAS
 tại R1 
 iptables -t nat -A PREROUTING -p tcp -m tcp --dport 16522 -j DNAT --to 192.168.100.172:17222
 iptables -t nat -A POSTROUTING -p tcp -m tcp --dport 17222 -d 192.168.100.172 -j MASQUERADE
+
+
+
+
+
+
+
+# iptables -t nat -A PREROUTING -p tcp -i eth0 --dport 2211 \
+#        -j DNAT --to-destination 10.0.1.1:4422
+
+import iptc
+
+chain = iptc.Chain(iptc.Table('nat'), 'PREROUTING')
+
+rule = iptc.Rule()
+rule.protocol = 'tcp'
+rule.in_interface = 'eth0'
+
+m = rule.create_match('tcp')
+m.dport = '2211'
+
+t = rule.create_target('DNAT')
+t.to_destination = '10.0.1.1:4422'
+
+chain.insert_rule(rule)
+
+
