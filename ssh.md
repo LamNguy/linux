@@ -50,7 +50,71 @@ AllowUsers keyword can be followed by a list of user  name patterns , seperated 
  
 `$ ssh remote_server "bash -s" < ./file_bash [arguments]`
 
+SSH Config File Location
 
+OpenSSH client-side configuration file is named config, and it is stored in .ssh directory under user’s home directory.
+$mkdir -p ~/.ssh && chmod 700 ~/.ssh
 
+The ~/.ssh directory is automatically created when the user runs the ssh command for the first time. If the directory doesn’t exist on your system, create it using the command below:
+touch ~/.ssh/config
+
+This file must be readable and writable only by the user, and not accessible by others:
+chmod 600 ~/.ssh/config
+
+ The SSH Config File takes the following structure:
+ 
+ Host hostname1
+    SSH_OPTION value
+    SSH_OPTION value
+
+Host hostname2
+    SSH_OPTION value
+
+Host *
+    SSH_OPTION value
  
  
+* - Matches zero or more characters. For example, Host * matches all hosts, while 192.168.0.* matches hosts in the 192.168.0.0/24 subnet.
+? - Matches exactly one character. The pattern, Host 10.10.0.? matches all hosts in 10.10.0.[0-9] range.
+! - When used at the start of a pattern, it negates the match. For example, Host 10.10.0.* !10.10.0.5 matches any host in the 10.10.0.0/24 subnet except 10.10.0.5.
+
+
+
+Host targaryen
+    HostName 192.168.1.10
+    User daenerys
+    Port 7654
+    IdentityFile ~/.ssh/targaryen.key
+
+Host tyrell
+    HostName 192.168.10.20
+
+Host martell
+    HostName 192.168.10.50
+
+Host *ell
+    user oberyn
+
+Host * !martell
+    LogLevel INFO
+
+Host *
+    User root
+    Compression yes
+    
+    
+    
+If you want to override a single option, you can specify it on the command line. For example, if you have the following definition:
+
+Host dev
+    HostName dev.example.com
+    User john
+    Port 2322
+Copy
+and you want to use all other options but to connect as user root instead of john simply specify the user on the command line:
+
+ssh -o "User=root" dev
+The -F (configfile) option allows you to specify an alternative per-user configuration file.
+
+To tell the ssh client to ignore all of the options specified in the ssh configuration file, use:
+ssh -F /dev/null user@example.com
